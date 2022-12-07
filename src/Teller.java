@@ -42,6 +42,7 @@ public class Teller extends Thread
                 Customer c = bankQueue.getNext();
                 isWorking = false;
                 if (c != null) {
+                    System.out.printf("Teller: %d is now serving: %s\n", id, c.toString());
                     addCustomer(c);
                 }
             }

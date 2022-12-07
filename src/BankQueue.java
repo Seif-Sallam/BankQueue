@@ -6,6 +6,10 @@ public class BankQueue extends Thread
     private ArrayBlockingQueue<Customer> customerArrayList;
     private TimeThread timeThread;
 
+    private int allServed = 0;
+
+    private int allRemoved = 0;
+
     int capacity;
     public BankQueue(TimeThread timeThread, int capacity, int allPossibleCustomers)
     {
@@ -44,6 +48,7 @@ public class BankQueue extends Thread
                     }
                 }
             }
+            allRemoved++;
             customerArrayList.remove(current);
             return current;
         }
@@ -54,8 +59,11 @@ public class BankQueue extends Thread
         while(true) {
             while (customerArrayList.size() != capacity) {
                 Customer nextCustomer = allCustomers.getNext(timeThread.getTime());
-                if (nextCustomer != null)
+                if (nextCustomer != null) {
+                    allServed++;
+                    System.out.printf("Customer %s is now into the queue and has the number: %dM and has %d in line\n", nextCustomer.toString(), allServed, allServed - allRemoved);
                     addCustomer(nextCustomer);
+                }
             }
         }
     }

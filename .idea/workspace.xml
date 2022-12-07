@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f29774df-b5ae-422f-9bce-ff87955388f3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/TimeThread.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BankQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BankQueue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Customer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CustomerDayEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CustomerDayEntry.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PCSystem.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Teller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Teller.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
