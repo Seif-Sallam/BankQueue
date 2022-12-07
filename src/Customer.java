@@ -4,9 +4,12 @@ public class Customer {
     private int arrivalTime;
     private int workTime;
 
+    static private int allIDs = 0;
+
     Customer()
     {
         isVIP = false;
+        ID = allIDs++;
     }
 
 
@@ -22,10 +25,6 @@ public class Customer {
 
     public int getID() {
         return ID;
-    }
-
-    public void setID(int ID) {
-        this.ID = ID;
     }
 
     public void setVIP()
@@ -44,5 +43,10 @@ public class Customer {
 
     public void setArrivalTime(int arrivalTime) {
         this.arrivalTime = arrivalTime;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Customer %d, Arrived at %d, VIP: %s, WorkTime: %d", ID, arrivalTime, (isVIP) ? "Yes" : "No", workTime);
     }
 }

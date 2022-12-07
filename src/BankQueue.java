@@ -1,11 +1,19 @@
-import java.util.ArrayList;
+import java.util.concurrent.ArrayBlockingQueue;
 
-public class BankQueue {
-    private ArrayList<Customer> customerArrayList;
+public class BankQueue extends Thread
+{
+    private CustomerDayEntry allCustomers;
+    private ArrayBlockingQueue<Customer> customerArrayList;
+    private TimeThread timeThread;
 
-    public BankQueue()
+    int capacity;
+    public BankQueue(TimeThread timeThread, int capacity, int allPossibleCustomers)
     {
-        customerArrayList = new ArrayList<>();
+        allCustomers = new CustomerDayEntry();
+        this.timeThread = timeThread;
+        customerArrayList = new ArrayBlockingQueue<>(capacity);
+        allCustomers.init(allPossibleCustomers);
+        this.capacity = capacity;
     }
 
     public void addCustomer(Customer c)
@@ -17,17 +25,44 @@ public class BankQueue {
     {
         if (customerArrayList.size() == 0)
             return null;
+
         synchronized (this) {
-            Customer current = customerArrayList.get(0);
+            Customer current = customerArrayList.peek();
             for (var customer : customerArrayList) {
                 if (current.isVIP() && customer.isVIP()) {
-                    if (current.getArrivalTime() > customer.getArrivalTime())
+                    if (current.getArrivalTime() > customer.getArrivalTime()) {
                         current = customer;
+                    }
+                }
+                else if(!current.isVIP() && customer.isVIP())
+                {
+                    current = customer;
+                }
+                else {
+                    if (current.getArrivalTime() > customer.getArrivalTime()) {
+                        current = customer;
+                    }
                 }
             }
+            customerArrayList.remove(current);
             return current;
         }
     }
 
+    @Override
+    public void run() {
+        while(true) {
+            while (customerArrayList.size() != capacity) {
+                Customer nextCustomer = allCustomers.getNext(timeThread.getTime());
+                if (nextCustomer != null)
+                    addCustomer(nextCustomer);
+            }
+        }
+    }
+
+    public boolean isEmpty()
+    {
+        return this.customerArrayList.size() == 0 && allCustomers.isEmpty();
+    }
 
 }
